@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Board</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <div class="layout">
+    <header class="topbar">
+      <span class="topbar-title">Task board</span>
+      <div class="topbar-right">
+        <select id="client-filter">
+          <option value="">All clients</option>
+        </select>
+        <button id="add-btn" onclick="toggleForm()">+ Add task</button>
+      </div>
+    </header>
+
+    <div class="add-panel" id="add-panel">
+      <div class="add-form">
+        <input id="input-action" type="text" placeholder="Action (required) — what needs to be done?">
+        <div class="form-row">
+          <input id="input-client" type="text" placeholder="Client">
+          <input id="input-deadline" type="text" placeholder="Deadline (e.g. Friday, June 5)">
+        </div>
+        <textarea id="input-notes" placeholder="Notes — paste relevant snippet from email (optional)"></textarea>
+        <div class="form-footer">
+          <span class="paste-hint">Cmd+Enter to save</span>
+          <div class="form-actions">
+            <button class="btn-secondary" onclick="toggleForm()">Cancel</button>
+            <button class="btn-primary" id="save-btn" onclick="saveNewTask()">Add task</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="board">
+      <div class="col" id="col-todo" ondragover="onDragOver(event)" ondrop="onDrop(event,'todo')">
+        <div class="col-head">
+          <span class="col-label">To do</span>
+          <span class="col-badge" id="ct-todo">0</span>
+        </div>
+        <div class="col-cards" id="tasks-todo"></div>
+        <div class="col-empty" id="emp-todo">No tasks</div>
+      </div>
+      <div class="col" id="col-inprogress" ondragover="onDragOver(event)" ondrop="onDrop(event,'inprogress')">
+        <div class="col-head">
+          <span class="col-label">In progress</span>
+          <span class="col-badge" id="ct-inprogress">0</span>
+        </div>
+        <div class="col-cards" id="tasks-inprogress"></div>
+        <div class="col-empty" id="emp-inprogress"></div>
+      </div>
+      <div class="col" id="col-done" ondragover="onDragOver(event)" ondrop="onDrop(event,'done')">
+        <div class="col-head">
+          <span class="col-label">Done</span>
+          <span class="col-badge" id="ct-done">0</span>
+        </div>
+        <div class="col-cards" id="tasks-done"></div>
+        <div class="col-empty" id="emp-done"></div>
+      </div>
+    </div>
+
+    <div class="status-bar" id="status-bar"></div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

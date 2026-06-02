@@ -1,0 +1,4 @@
+# ignore config with API keys — never commit this
+js/config.js
+
+.DS_Store
